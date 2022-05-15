@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Now</title>
+    <style>
+        .body{
+            text-align: -webkit-center;
+            background: darkslategrey
+        }
+        .jumbotron-heading{
+            font-size: 35px;
+            color: khaki;
+        }
+        .row{
+            font-size: 22px;
+        }
+        .head{
+            color: darkred;
+        }
+        .bdy{
+            color: aliceblue;
+        }
+        .btn{
+            font-size: 20px;
+            background: red;
+            border-color: blanchedalmond;
+        }
+        .btn1{
+            font-size: 20px;
+            background: khaki;
+            position: relative;
+            border: double;
+            padding-left: 19px;
+            padding-right: 15px;
+            text-decoration: auto;
+            color: blue;
+            border-color: forestgreen;
+        }
+    </style>
+</head>
+<body class="body">
+<th:block xmlns:th="http://www.thymeleaf.org">
+    <section class="jumbotron text-center">
+        <div class="container">
+            <h3 class="jumbotron-heading">Booked cars for
+                <th:block th:if="${#request.getRemoteUser() != null}" th:text="${#request.getRemoteUser()}"></th:block>
+            </h3>
+        </div>
+    </section>
+
+    <div th:if="${hasError}">
+        <h5 class="text-center text-danger" th:text="${error}"></h5>
+    </div>
+
+    <div class="container mb-4">
+        <div class="row">
+            <div class="col-12">
+<!--                th:if="${car.size() > 0}"-->
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead class="head">
+                        <tr>
+                            <th scope="col">Car</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Category</th>
+                        </tr>
+                        </thead>
+                        <tbody class="bdy">
+                        <tr th:each="booked : ${booked}" class="cart-item">
+                            <td th:text="${booked.getName()}"></td>
+                            <td th:text="${booked.getPrice()}"></td>
+                            <td th:text="${booked.getCategory() != null} ? ${booked.getCategory().getName()} : 'No Category'"></td>
+                            <td><form th:action="@{'/book-now/delete-booked/{id}' (id=10)}"
+                                      th:method="DELETE">
+                                <button type="submit"
+                                        class="btn">
+                                    <i>Delete</i>
+                                </button>
+                            </form>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <form th:action="@{'/cars'}">
+                        <button type="submit"
+                                class="btn1">
+                            <i>BACK</i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>
+
+</body>
+</html>

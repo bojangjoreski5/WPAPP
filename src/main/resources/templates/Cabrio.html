@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Cabrio</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+    <link rel="stylesheet" href="../static/css/bootstrap.rtl.css">
+    <link rel="stylesheet" href="../static/css/bootstrap-grid.css">
+    <link rel="stylesheet" href="../static/css/bootstrap-grid.rtl.css">
+    <link rel="stylesheet" href="../static/css/bootstrap-reboot.css">
+    <link rel="stylesheet" href="../static/css/bootstrap-reboot.rtl.css">
+    <link rel="stylesheet" href="../static/css/bootstrap-utilities.css">
+    <link rel="stylesheet" href="../static/css/bootstrap-utilities.rtl.css">
+    <script src="../static/js/bootstrap.bundle.js"></script>
+    <script src="../static/js/bootstrap.esm.js"></script>
+    <script src="../static/js/bootstrap.js"></script>
+    <style>
+        #nav{
+            background: blue;
+            display: flex;
+        }
+        .content{
+            text-decoration: auto;
+            background: yellow;
+            color: orangered;
+            margin: 25px;
+            width: 192px;
+            height: 44px;
+            text-align: center;
+            color: blue;
+            font-size: 30px;
+            font-family: sans-serif;
+            padding-right: 97px;
+            border-style: dashed;
+        }
+        .h1 {
+            margin-top: 5px;
+            text-align: center;
+            color: cornsilk;
+            font-size: 60px;
+        }
+        .head{
+            background: cadetblue;
+        }
+        .body{
+            background: darkslategrey;
+        }
+        .item{
+            text-align: center;
+        }
+        .table{
+            margin-left: 299px;
+            font-size: 24px;
+            color: burlywood;
+            font-weight: bolder;
+            border-style: outset;
+            width: 1000px;
+            margin-top: 30px
+        }
+        .th{
+            font-size: 33px;
+            color: darkred;
+        }
+        .lgbtn{
+            position: absolute;
+            left: 1400px;
+            top: 45px;
+            font-size: 30px;
+            font-family: cursive;
+        }
+        .addbtn{
+            position: absolute;
+            left: 1322px;
+            top: 265px;
+            font-size: 23px;
+            background: honeydew;
+        }
+        .btn{
+            font-size: 20px;
+            background: red;
+            border-color: blanchedalmond;
+        }
+        .btn2{
+            font-size: 20px;
+            background: khaki;
+            position: relative;
+            border: double;
+            padding-left: 19px;
+            padding-right: 15px;
+            text-decoration: auto;
+            color: blue;
+            border-color: forestgreen;
+        }
+        .h1a{
+            position: relative;
+            text-decoration: auto;
+            color: aliceblue;
+        }
+        .addbtn1{
+            text-decoration: auto;
+            background: chartreuse;
+            border: double;
+            border-color: darkred;
+        }
+
+
+    </style>
+</head>
+<body class="body">
+<div class="head">
+    <h1 class="h1">
+      <a href="/" class="h1a">Rent your vehicle</a>
+    </h1>
+    <div class="lgbtn">
+        <a href="/login">Logout</a>
+    </div>
+    <div id="nav">
+
+        <a href="/cabrio" method="get" class="content">Cabrio Cars</a>
+        <a href="/classic" method="get" class="content">Classic Cars</a>
+        <a href="/oldtimer" method="get" class="content">Oldtimer Cars</a>
+        <a href="/sport" method="get" class="content">Sport Cars</a>
+        <a href="/suv" method="get" class="content">SUV Cars</a>
+
+    </div>
+</div>
+<div>
+    <table class="table">
+        <thead class="th">
+        <th>Make</th>
+        <th>Model</th>
+        <th>Fuel Type</th>
+        <th>Color</th>
+        <th>Power</th>
+        <th>Year</th>
+        <th>Id</th>
+        <th>Price ($)</th>
+        </thead>
+        <tbody>
+        <!-- For each news you should have one <tr> like below -->
+        <tr class="item" th:each="cabrio: ${cabrio}">
+            <!--/*@thymesVar id="make" type="make"*/-->
+            <td th:text="${cabrio.make}">[cabrio.make]</td>
+            <!--/*@thymesVar id="model" type="model"*/-->
+            <td th:text="${cabrio.model}">[cabrio.model]</td>
+            <!--/*@thymesVar id="fuelType" type="fuelType"*/-->
+            <td th:text="${cabrio.fuelType}">[cabrio.fuelType]</td>
+            <!--/*@thymesVar id="color" type="color"*/-->
+            <td th:text="${cabrio.color}">[cabrio.color]</td>
+            <!--/*@thymesVar id="power" type="power"*/-->
+            <td th:text="${cabrio.power}">[cabrio.power]</td>
+            <!--/*@thymesVar id="year" type="year"*/-->
+            <td th:text="${cabrio.year}">[cabrio.year]</td>
+            <!--/*@thymesVar id="id" type="id"*/-->
+            <td th:text="${cabrio.id}">[cabrio.id]</td>
+            <!--/*@thymesVar id="price" type="price"*/-->
+            <td th:text="${cabrio.price}">[cabrio.price]</td>
+            <td class="text-right">
+                <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                    <form th:action="@{'/cabrio/delete/{id}' (id=${cabrio.getId()})}"
+                          th:method="DELETE">
+                        <button type="submit"
+                                class="btn">
+                            <i>Delete</i>
+                        </button>
+                    </form>
+                </th:block>
+                <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                    <a th:href="@{'/cabrio/edit-Cabrio/{id}' (id=${cabrio.getId()})}"
+                       class="btn2">
+                        <i>Edit</i>
+                    </a>
+                </th:block>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="addbtn">
+        <div sec:authorize="hasRole('ROLE_ADMIN')">
+            <a href="/cabrio/addCabrio" class="addbtn1">
+                Add new car
+            </a>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

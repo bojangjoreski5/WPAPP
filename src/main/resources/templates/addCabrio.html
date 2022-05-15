@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add/Edit Cabrio</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+    <link rel="stylesheet" href="../static/css/bootstrap.rtl.css">
+    <link rel="stylesheet" href="../static/css/bootstrap-grid.css">
+    <link rel="stylesheet" href="../static/css/bootstrap-grid.rtl.css">
+    <link rel="stylesheet" href="../static/css/bootstrap-reboot.css">
+    <link rel="stylesheet" href="../static/css/bootstrap-reboot.rtl.css">
+    <link rel="stylesheet" href="../static/css/bootstrap-utilities.css">
+    <link rel="stylesheet" href="../static/css/bootstrap-utilities.rtl.css">
+    <script src="../static/js/bootstrap.bundle.js"></script>
+    <script src="../static/js/bootstrap.esm.js"></script>
+    <script src="../static/js/bootstrap.js"></script>
+
+    <link href="webjars/bootstrap/3.3.6/css/bootstrap.min.css"
+          rel="stylesheet">
+    <script src="webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="webjars/jquery/1.9.1/jquery.min.js"></script>
+    <style>
+        .body{
+            text-align: center;
+            background: darkslategrey;
+        }
+        .jumbotron-heading{
+            font-size: 35px;
+            color: khaki;
+        }
+        #make{
+            margin-left: 48px;
+        }
+        #model{
+            margin-left: 40px;
+        }
+        #fuelType{
+            margin-left: 15px;
+        }
+        #year{
+            margin-left: 60px;
+        }
+        #color{
+            margin-left: 52px;
+        }
+        #power{
+            margin-left: 41px;
+        }
+        #price{
+            margin-left: 95px;
+        }
+        .form-group{
+            margin: 10px;
+        }
+        .row{
+            font-size: 25px;
+            color: burlywood;
+        }
+        #submit{
+            background: cadetblue;
+            width: 95px;
+            height: 34px;
+            color: crimson;
+            font-size: 19px;
+        }
+        #bck{
+            text-decoration: auto;
+            background: cadetblue;
+            border: double;
+            border-color: black;
+            padding-left: 19px;
+            padding-right: 26px;
+            position: relative;
+            padding-bottom: 4px;
+            font-size: 20px;
+            padding-top: 3px;
+            color: crimson;        }
+
+
+    </style>
+
+</head>
+<body class="body">
+<th:block xmlns:th="http://www.thymeleaf.org">
+    <section class="jumbotron text-center">
+        <div class="container">
+            <h1 class="jumbotron-heading">ADD/EDIT CAR</h1>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5">
+                <form action="/cabrio/add-Cabrio" method="POST">
+                    <input id="id" type="hidden" name="id" th:value="(${cabrioCars} != null ? ${cabrioCars.getId()} : '')">
+                    <div class="form-group">
+                        <label for="make" class="visually-hidden">Car make</label>
+                        <input type="text"
+                               class="form-control"
+                               id="make"
+                               name="make"
+                               th:value="(${cabrioCars} != null ? ${cabrioCars.getMake()} : '')"
+                               required
+                               placeholder="Enter car make">
+                    </div>
+                    <div class="form-group">
+                        <label for="model">Car model</label>
+                        <input type="text"
+                               class="form-control"
+                               id="model"
+                               name="model"
+                               th:value="(${cabrioCars} != null ? ${cabrioCars.getModel()} : '')"
+                               required
+                               placeholder="Enter car model">
+                    </div>
+                    <div class="form-group">
+                        <label for="fuelType">Car fuelType</label>
+                        <input type="text"
+                               class="form-control"
+                               id="fuelType"
+                               name="fuelType"
+                               th:value="(${cabrioCars} != null ? ${cabrioCars.getFuelType()} : '')"
+                               required
+                               placeholder="Enter fuel type">
+                    </div>
+                    <div class="form-group">
+                        <label for="year">Car year</label>
+                        <input type="text"
+                               class="form-control"
+                               id="year"
+                               name="year"
+                               th:value="(${cabrioCars} != null ? ${cabrioCars.getYear()} : '')"
+                               required
+                               placeholder="Enter car year">
+                    </div>
+                    <div class="form-group">
+                        <label for="color">Car color</label>
+                        <input type="text"
+                               class="form-control"
+                               id="color"
+                               name="color"
+                               th:value="(${cabrioCars} != null ? ${cabrioCars.getColor()} : '')"
+                               required
+                               placeholder="Enter car color">
+                    </div>
+                    <div class="form-group">
+                        <label for="power">Car power</label>
+                        <input type="text"
+                               class="form-control"
+                               id="power"
+                               name="power"
+                               th:value="(${cabrioCars} != null ? ${cabrioCars.getPower()} : '')"
+                               required
+                               placeholder="Enter car power">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="price">Price</label>
+                        <!--/*@thymesVar id="getPrice" type="getPrice"*/-->
+                        <input type="text"
+                               class="form-control"
+                               id="price"
+                               name="price"
+                               th:value="(${cabrioCars} != null ? ${cabrioCars.getPrice()} : '')"
+                               placeholder="Price">
+                    </div>
+
+                    <button id="submit" type="submit" class="btn btn-primary"> Submit</button>
+                    <a type="button" id="bck" class="btn btn-primary" href="/cabrio">Back</a>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+</th:block>
+</body>
+</html>
